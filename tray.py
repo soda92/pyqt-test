@@ -1,5 +1,6 @@
 import ctypes
 import sys
+import os
 
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QDesktopWidget
@@ -31,7 +32,8 @@ class myApp(QWidget):
 
 if __name__ == '__main__':
     myappid = 'mycompany.myproduct.subproduct.version'  # arbitrary string
-    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+    if os.name == 'nt':
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     app = QApplication(sys.argv)
     frame = myApp()
